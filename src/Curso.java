@@ -1,3 +1,4 @@
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -20,10 +21,21 @@ public class Curso {
     }
 
     public List<Aula> getAulas() {
-        return aulas;
+        return Collections.unmodifiableList(aulas);
     }
 
     public void adiciona(Aula aula) { // adiciona uma aula na lista
         this.aulas.add(aula);
+    }
+
+    public int getTempoTotal() {
+       return this.aulas.stream()
+               .mapToInt(Aula::getTempo)
+               .sum(); // soma os tempos das aulas
+    }
+
+    @Override
+    public String toString() {
+        return "[Curso: " + nome + ", tempo total: " + this.getTempoTotal() + ", aulas: + " + this.aulas + "]";
     }
 }
