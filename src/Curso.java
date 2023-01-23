@@ -7,6 +7,8 @@ public class Curso {
 
     private Set<Aluno> alunos = new HashSet<>(); // cria um conjunto de alunos - associação
 
+    private Map<Integer, Aluno> matriculaParaAluno = new HashMap<>(); // cria um mapa de matrícula para aluno - associação
+
     public Curso(String nome, String instrutor) {
         this.nome = nome;
         this.instrutor = instrutor;
@@ -41,6 +43,7 @@ public class Curso {
 
     public void matricula(Aluno aluno) {
         this.alunos.add(aluno);
+        this.matriculaParaAluno.put(aluno.getNumeroMatricula(), aluno);
     }
 
     public Set<Aluno> getAlunos() {
@@ -49,5 +52,12 @@ public class Curso {
 
     public boolean estaMatriculado(Aluno aluno) {
         return this.alunos.contains(aluno); // verifica se o aluno está matriculado no curso
+    }
+
+    public Aluno buscaMatriculado(int numero) { // busca um aluno matriculado pelo número
+        if (!matriculaParaAluno.containsKey(numero)) // verifica se o número está no mapa
+            throw new NoSuchElementException("Matrícula não encontrada " + numero);
+
+        return matriculaParaAluno.get(numero);
     }
 }
