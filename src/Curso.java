@@ -1,11 +1,11 @@
-import java.util.Collections;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 public class Curso {
     private String nome;
     private String instrutor;
     private List<Aula> aulas = new LinkedList<>(); // cria uma lista de aulas - associação
+
+    private Set<Aluno> alunos = new HashSet<>(); // cria um conjunto de alunos - associação
 
     public Curso(String nome, String instrutor) {
         this.nome = nome;
@@ -37,5 +37,13 @@ public class Curso {
     @Override
     public String toString() {
         return "[Curso: " + nome + ", tempo total: " + this.getTempoTotal() + ", aulas: + " + this.aulas + "]";
+    }
+
+    public void matricula(Aluno aluno) {
+        this.alunos.add(aluno);
+    }
+
+    public Set<Aluno> getAlunos() {
+        return Collections.unmodifiableSet(alunos); // retorna uma cópia do conjunto de alunos
     }
 }
