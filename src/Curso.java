@@ -46,4 +46,8 @@ public class Curso {
     public Set<Aluno> getAlunos() {
         return Collections.unmodifiableSet(alunos); // retorna uma cópia do conjunto de alunos
     }
+
+    public boolean estaMatriculado(Aluno aluno) {
+        return this.alunos.contains(aluno); // verifica se o aluno está matriculado no curso
+    }
 }
